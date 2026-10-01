@@ -51,7 +51,6 @@ class FlashPanel(FileDumpBase, DevicesBase):
         self.Cancel = self.BindCommandButton("button_cancel", self.OnCancelClick)
 
         self.Baudrate = self.BindComboBox("combo_baudrate")
-        self.BaudrateCustom = self.BindTextCtrl("input_baudrate")
 
         self.FileTypeText = self.FindStaticText("text_file_type")
         self.FileType = self.BindTextCtrl("input_file_type")
@@ -185,7 +184,6 @@ class FlashPanel(FileDumpBase, DevicesBase):
                 # perform file type detection again (in case of switching Read -> Write)
                 self.restore_write_filename()
 
-        self.BaudrateCustom.Enable(self.Baudrate.GetStringSelection() == "Custom")
         self.Family.Enable(reading or manual)
         self.FileTypeText.Enable(writing)
         self.FileType.Enable(writing)
@@ -201,7 +199,7 @@ class FlashPanel(FileDumpBase, DevicesBase):
         warnings = []
 
         if not self.is_baudrate_valid:
-            errors.append("Enter a valid custom baud rate")
+            errors.append("Enter a valid baud rate (or Auto)")
 
         if writing:
             self.FileText.SetLabel("Input file")
@@ -362,32 +360,21 @@ class FlashPanel(FileDumpBase, DevicesBase):
 
     @property
     def baudrate(self) -> int | None:
-        """Selected baud rate; None for Auto (or an invalid custom value)."""
-        text = self.Baudrate.GetStringSelection()
-        if text == "Custom":
-            text = self.BaudrateCustom.GetValue().strip()
+        """Entered baud rate; None for Auto (or an invalid value)."""
         try:
-            value = int(text)
+            value = int(self.Baudrate.GetValue().strip())
         except ValueError:
             return None
         return value if value > 0 else None
 
     @property
     def is_baudrate_valid(self) -> bool:
-        return self.Baudrate.GetStringSelection() != "Custom" or bool(self.baudrate)
+        text = self.Baudrate.GetValue().strip()
+        return text.lower() == "auto" or self.baudrate is not None
 
     @baudrate.setter
     def baudrate(self, value: int | None):
-        if value is None:
-            self.Baudrate.SetSelection(0)
-        else:
-            index = self.Baudrate.FindString(str(value))
-            if index == wx.NOT_FOUND:
-                self.Baudrate.SetStringSelection("Custom")
-                self.BaudrateCustom.ChangeValue(str(value))
-            else:
-                self.Baudrate.SetSelection(index)
-        self.BaudrateCustom.Enable(self.Baudrate.GetStringSelection() == "Custom")
+        self.Baudrate.SetValue("Auto" if value is None else str(value))
 
     @property
     def operation(self):

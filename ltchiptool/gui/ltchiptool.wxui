@@ -237,7 +237,6 @@
           row="1">
           <node
             class="wxComboBox"
-            style="wxCB_READONLY"
             var_name="combo_baudrate"
             selection_string="Auto">
             <node
@@ -264,15 +263,7 @@
             <node
               class="ComboBoxItem"
               label="2000000" />
-            <node
-              class="ComboBoxItem"
-              label="Custom" />
           </node>
-          <node
-            class="wxTextCtrl"
-            var_name="input_baudrate"
-            disabled="1"
-            size="100,-1" />
         </node>
         <node
           class="wxGridSizer"

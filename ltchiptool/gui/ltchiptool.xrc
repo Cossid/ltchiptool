@@ -242,27 +242,17 @@
 						<flag>wxALL</flag>
 						<border>5</border>
 						<object class="wxComboBox" name="combo_baudrate">
-							<style>wxCB_READONLY</style>
 							<selection>0</selection>
 							<content>
-									<item>Auto</item>
-									<item>115200</item>
-									<item>230400</item>
-									<item>460800</item>
-									<item>921600</item>
-									<item>1000000</item>
-									<item>1500000</item>
-									<item>2000000</item>
-									<item>Custom</item>
+								<item>Auto</item>
+								<item>115200</item>
+								<item>230400</item>
+								<item>460800</item>
+								<item>921600</item>
+								<item>1000000</item>
+								<item>1500000</item>
+								<item>2000000</item>
 							</content>
-						</object>
-					</object>
-					<object class="sizeritem">
-						<flag>wxALL</flag>
-						<border>5</border>
-						<object class="wxTextCtrl" name="input_baudrate">
-							<size>100,-1</size>
-							<enabled>0</enabled>
 						</object>
 					</object>
 				</object>
