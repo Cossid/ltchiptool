@@ -15,20 +15,12 @@ def flash_link_interactive(soc: SocInterface, link_timeout: float):
     )
     prev_timeout = soc.conn.link_timeout
 
-    for stage in range(4):
+    for stage in range(2):
         debug(f"Linking: stage {stage}")
         if stage == 0:
             # use timeout of 1.0s to check if already linked
             soc.flash_change_timeout(link_timeout=1.0)
         elif stage == 1:
-            # try software UART reset, with a shorter timeout
-            soc.flash_sw_reset()
-            soc.flash_change_timeout(link_timeout=0.5)
-        elif stage == 2:
-            # try hardware GPIO reset
-            soc.flash_hw_reset()
-            soc.flash_change_timeout(link_timeout=1.0)
-        elif stage == 3:
             # guide the user to connect the chip properly, or reset it manually
             soc.flash_change_timeout(link_timeout=link_timeout or prev_timeout)
             for line in format_flash_guide(soc):

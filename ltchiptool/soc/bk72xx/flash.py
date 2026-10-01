@@ -91,10 +91,6 @@ class BK72XXFlash(SocInterface, ABC):
             self.bk.link_timeout = link_timeout
             self.conn.link_timeout = link_timeout
 
-    def flash_hw_reset(self) -> None:
-        self.flash_build_protocol()
-        self.bk.hw_reset()
-
     def flash_connect(self) -> None:
         if self.bk and self.conn.linked:
             return

@@ -3,7 +3,6 @@
 from abc import ABC
 from io import BytesIO
 from logging import debug, warning
-from time import sleep
 from typing import IO, Generator, List, Optional, Tuple, Union
 
 from hexdump import hexdump
@@ -97,18 +96,6 @@ class AmebaZFlash(SocInterface, ABC):
         if link_timeout:
             self.amb.link_timeout = link_timeout
             self.conn.link_timeout = link_timeout
-
-    def flash_sw_reset(self) -> None:
-        self.flash_build_protocol()
-        port = self.amb.s
-        prev_baudrate = port.baudrate
-        port.baudrate = 115200
-        sleep(0.1)
-        # try software reset by writing the family ID, preceded by 55AA
-        magic_word = b"\x55\xaa" + self.family.id.to_bytes(length=4, byteorder="big")
-        port.write(magic_word)
-        sleep(0.5)
-        port.baudrate = prev_baudrate
 
     def flash_connect(self) -> None:
         if self.amb and self.conn.linked:
