@@ -241,38 +241,28 @@
 					<object class="sizeritem">
 						<flag>wxALL</flag>
 						<border>5</border>
-						<object class="wxRadioButton" name="radio_baudrate_auto">
-							<label>Auto</label>
-							<value>1</value>
-							<style>wxRB_GROUP</style>
+						<object class="wxComboBox" name="combo_baudrate">
+							<style>wxCB_READONLY</style>
+							<selection>0</selection>
+							<content>
+									<item>Auto</item>
+									<item>115200</item>
+									<item>230400</item>
+									<item>460800</item>
+									<item>921600</item>
+									<item>1000000</item>
+									<item>1500000</item>
+									<item>2000000</item>
+									<item>Custom</item>
+							</content>
 						</object>
 					</object>
 					<object class="sizeritem">
 						<flag>wxALL</flag>
 						<border>5</border>
-						<object class="wxRadioButton" name="radio_baudrate_115200">
-							<label>115200</label>
-						</object>
-					</object>
-					<object class="sizeritem">
-						<flag>wxALL</flag>
-						<border>5</border>
-						<object class="wxRadioButton" name="radio_baudrate_230400">
-							<label>230400</label>
-						</object>
-					</object>
-					<object class="sizeritem">
-						<flag>wxALL</flag>
-						<border>5</border>
-						<object class="wxRadioButton" name="radio_baudrate_460800">
-							<label>460800</label>
-						</object>
-					</object>
-					<object class="sizeritem">
-						<flag>wxALL</flag>
-						<border>5</border>
-						<object class="wxRadioButton" name="radio_baudrate_921600">
-							<label>921600</label>
+						<object class="wxTextCtrl" name="input_baudrate">
+							<size>100,-1</size>
+							<enabled>0</enabled>
 						</object>
 					</object>
 				</object>
