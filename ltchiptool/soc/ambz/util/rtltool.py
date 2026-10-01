@@ -222,16 +222,6 @@ class RTLXMD:
         return ret
 
     def connect(self):
-        # issue reset-to-bootloader:
-        # RTS = either RESET (both active low = chip in reset)
-        # DTR = GPIOA_30 (active low = boot to flasher)
-        self._port.setDTR(False)
-        self._port.setRTS(True)
-        time.sleep(0.05)
-        self._port.setDTR(True)
-        self._port.setRTS(False)
-        time.sleep(0.05)
-        self._port.setDTR(False)
         return self.GetFlashStatus()
 
     def EraseSectorsFlash(self, offset=0, size=0x200000):
