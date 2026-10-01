@@ -49,7 +49,13 @@ class DeviceWatcher(BaseThread):
         hwnd = win32gui.CreateWindow(
             DeviceWatcher._class_atom,
             DeviceWatcher.__name__,
-            0, 0, 0, 0, 0, 0, 0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             hinstance,
             None,
         )
