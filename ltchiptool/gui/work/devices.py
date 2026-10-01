@@ -1,8 +1,8 @@
 #  Copyright (c) Kuba Szczodrzyński 2023-1-9.
 
 from logging import debug, error
-from threading import Lock
 from queue import Empty, Queue
+from threading import Lock
 from typing import Callable
 
 from ltchiptool.util.logging import verbose
